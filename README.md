@@ -1,4 +1,8 @@
-# PixiJS Presentation
+# Tips for writing cleaner JavaScript - Presentation
+
+## About this presentation
+
+This talk will focus on practical tips for writing cleaner code. We'll look at actual before and after code samples and discuss the improvements that the proposed changes offer. Along the way we'll touch on common best practices.
 
 ## Tips for running this presentation
 
@@ -10,7 +14,7 @@ If you're not familiar with RevealJS the following tips might prove helpful. Try
 
 ## View the presentation
 
-[http://cjus.github.io/pixijs-presentation](http://cjus.github.io/pixijs-presentation)
+[http://cjus.github.io/writing-cleaner-js-presentation](http://cjus.github.io/writing-cleaner-js-presentation)
 
 ## Print the presentation
 
