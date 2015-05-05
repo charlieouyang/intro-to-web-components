@@ -50,7 +50,11 @@
   </p>
   <aside class="notes" data-markdown="">
     ---
-    >
+    > Thanks for your interest in this presentation
+    > This talk will focus on practical tips for writing cleaner code.
+    > However before we get to the practical stuff it's important to set the stage for why this stuff matters.
+    > Along the way We'll look at actual before and after code samples and discuss improvements
+    > We'll also highlight tools which can help us write cleaner code.
   </aside>
 </section>
 
@@ -71,7 +75,9 @@
 
   <aside class="notes" data-markdown="">
     ---
-    >
+    > So my name is Carlos Justiniano and I'm the HC.JS founder and a long-time programmer.
+    > I'm into full-stack JS development and I've consulted for numerous companies on commercial JS based products
+    > I've also worked with small startups and large established companies so I've had a front row seat on the need to produce clean code
   </aside>
 </section>
 
@@ -88,10 +94,94 @@
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    >
+    > So what is clean code?
+    > For me, it's code that is reasonably understandable.  It's also code that is free from side effects
+    > and it's code that can be tested
+    > Essentially it's code that I won't regret working with.
   </aside>
 </section>
 
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Important concepts for identifying and labeling bad code  -------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Important concepts for identifying and labeling bad code</h3>
+  <ul>
+    <li>Poorly written code</li>
+    <li>Mental context switching and code complexity</li>
+    <li>Tech / code debt</li>
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    > As we consider ways of writing better code it's important to understand what makes bad code bad and how it leads to tech debt.
+    > Poorly written code is the most common one we tend to encounter. The web is full of such code and many of the project we encounter contain poorly written code.
+    > That is true more often than not.
+    > Aside from poorly written code there is code that is simply complex or more complex than is necessary
+    > These factors contribute to something we call tech or code debt.
+    > The debt ends up being a cost we pay every time we have to deal with such code.
+    > Let's take a closer look
+  </aside>
+</section>
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Poorly written code ---------------------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Poorly written code</h3>
+  <li>Very few of us set out to write poor code</li>
+  <li>In many environments business pressures stress code quality</li>
+  <li>Often clean code degrades to poor code over time</li>
+  <aside class="notes" data-markdown="">
+    ---
+    > Most of us don't set out to write poor code.
+    > Often the pressures of "getting the job done" lead to short cuts and patches
+    > which end up degrading decent code into poor code status.
+  </aside>
+</section>
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Mental context switches and code complexity ---------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Mental context switches and code complexity</h3>
+  <ul>
+    <li>In computing a context switch is the basis of multitasking</li>
+    <li>In humans, a mental context occurs when you have to switch between various program states as you attempt to understand what a program is doing</li>
+    <li>The more complicated the code the more difficult the mental context switches</li>
+    <li>Context switches lead to fatigue</li>
+    <li>Definite correlation between the number of context switches and code complexity</li>
+    <li>Takeaway: seek to simplify</li>
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    > In computing a context switch is the process of saving the state of a task in order to switch to another task and later return
+    > A mental context occurs when you have to switch between various program state in your mind as you attempt to understand what a program is doing
+    > The more complicated the code the more difficult the mental context switches
+    > Context switches lead to fatigue.
+    > And Heaven forbid that you're interrupted during the process!
+    > Computers fare well - humans? hmmmm, Not sooo much
+    > There is a definite correlation between the number of mental context switches and the complexity of a given code.
+    > Naturally this is different for each of us.
+    > If a piece of code is unreasonably difficult to work with chances are good that there's room for improvement.
+    > And that's the real takeaway, pay attention to how difficult a piece of code is to deal with and consider ways of reducing the complexity - for yourself and for others.
+  </aside>
+</section>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Technical debt --------------------------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Technical debt is a recent metaphor referring to the eventual consequences of poor system design, software architecture or software development within a codebase. - Wikipedia</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    > The more difficult a body of code is to deal with the more expensive it may become to maintain.
+    > The more poor code we create the more debt we incur.
+    > Think of this kind of code as requiring a tax everytime someone has to deal with it.
+    > This is why it's referred to as a technical debt or code debt.
+  </aside>
+</section>
 
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <!-- Why should you care? --------------------------------------------------------------------------------------------->
@@ -108,42 +198,82 @@
     > Often the first person who has to deal with dirty code is the person who wrote it.
     > Then others may have to deal with it over time.
     > So there's a real cost to dealing with code that is difficult to work with.
-    > Anyone who's had to work late evenings and weekends because of difficult code, knows that the cost isn't just financial,
-    it's physical and emotional.
+    > Anyone who's had to work late evenings and weekends because of difficult code, knows that the cost isn't just
+    financial, it's physical and emotional.
+    > Difficult to work with code, enslaves you - it asks you to make sacrifices such as spending less time with your
+    love ones.
   </aside>
 </section>
 
 
 <!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Mental context switches and code complexity ---------------------------------------------------------------------->
+<!-- Tips for writing cleaner code ------------------------------------------------------------------------------------>
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Mental context switches and code complexity</h3>
+  <h3>Tips for writing cleaner code</h3>
   <ul>
-    <li>In computing a context switch is the basis of multitasking</li>
-    <li>A mental context occurs when you have to switch between various program state in your mind as you attempt to understand what a program is doing</li>
-    <li>The more complicated the code the more difficult the mental context switches</li>
+    <li>Write consistent looking code. Embrace a style guide.</li>
+    <li>Take care in naming your variables, functions and objects</li>
+    <li>Don't bring your Ruby, Python naming conventions - use JS naming conventions... i.e. camelCase, CapitalizeConstructorNames</li>
+    <li></li>
+    <li></li>
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    > In computing a context switch is the process of saving the state of a task in order to switch to another task and later return
-    > A mental context occurs when you have to switch between various program state in your mind as you attempt to understand what a program is doing
-    > The more complicated the code the more difficult the mental context switches
-    > Computers fare well - humans? Not so much
+    >
+  </aside>
+</section>
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- To comment or not to comment ------------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>To comment or not to comment?</h3>
+  <ul>
+    <li>It's the subject of some debate</li>
+    <li>We can agree that useless comments are worse than no comments</li>
+    <li>Con: Comment take work and can get out of date</li>
+    <li>Pro: Use comments to share an understanding that can't be easily be inferred from the code</li>
+    <li>Pro: Well structured comments can make the code easier to understand by providing visual separators</li>
+    <li>Tip: Consider JSDoc (http://usejsdoc.org/)</li>
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    > While this is the subject of some debate,
+    > we can all agree that bad and useless code comments are worse than no comments.
+    > Not adding comments is often just plain laziness - after all is work to create and maintain comments.
+    > Code comments should shed light on areas of code which can't easily be inferred from the actual code.
+    > Code comments can also make code easier to understand by visually acting as separators.
+    > Consider using JSDoc to make your code easier to understand.
+  </aside>
+</section>
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- JSDoc and Webstorm  ---------------------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Example: JSDoc and Webstorm</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    >
   </aside>
 </section>
 
 
 <!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Technical debt --------------------------------------------------------------------------------------------------->
+<!-- Tools to help you write cleaner code  ---------------------------------------------------------------------------->
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Technical debt (also known as design debt or code debt) is a recent metaphor referring to the eventual consequences of poor system design, software architecture or software development within a codebase. - Wikipedia</h3>
+  <h3>Tools to help you write cleaner code</h3>
+  <ul>
+    <li>Embrace consistency. Adopt a code style guide. Lots to choose from, see this one to start:
+      https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml
+    </li>
+    <li>Use Linters and style checkers. See: JSHint, JSCS</li>
+  </ul>
   <aside class="notes" data-markdown="">
     ---
-    > The more difficult a body of code is to deal with the more expensive it may become to maintain.
-    > Think of this kind of code as requiring a tax everytime someone has to deal with it.
-    > This is why it's referred to as a technical debt or code debt.
+    >
   </aside>
 </section>
 
