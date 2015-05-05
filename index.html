@@ -207,22 +207,169 @@
 
 
 <!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Tips for writing cleaner code ------------------------------------------------------------------------------------>
+<!-- Quick tips for writing cleaner code ------------------------------------------------------------------------------------>
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Tips for writing cleaner code</h3>
+  <h3>Quick tips for writing cleaner code</h3>
   <ul>
     <li>Write consistent looking code. Embrace a style guide.</li>
     <li>Take care in naming your variables, functions and objects</li>
-    <li>Don't bring your Ruby, Python naming conventions - use JS naming conventions... i.e. camelCase, CapitalizeConstructorNames</li>
-    <li></li>
+    <li>Don't bring your Ruby, Python or {your_language_here} naming conventions - use JS naming conventions... i.e. camelCase, CapitalizeConstructorNames</li>
+    <li>Favor small functions and objects</li>
+    <li>Limit the number of lines of code in a file or module</li>
     <li></li>
   </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    > Embrace a style guide. Which one you choose can be a matter of taste - but consistency is the real value.
+    > Take the time to carefully name your variables, functions and objects.  This will make your code easier to understand and maintain.
+      > For example, the name "value" is an example of a poor variable name.
+    > Use JavaScript established conventions in favor of the conventions from your other favorite language.
+    > Keep the size of your functions small. The larger a function the longer it will take to understand and modify it.
+    And the harder it will be to test it. Functions were invented for a reason... use them to refactor your code. The
+    same is true for objects.
+    > Limit the number of lines per file or module. I once worked on a bank where a loan application rules engine consisted of a single file with over 10,000 lines of code. Yeah - don't do that!
+  </aside>
+</section>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Don't use magic numbers ------------------------------------------------------------------------------------------>
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Don't use magic numbers</h3>
   <aside class="notes" data-markdown="">
     ---
     >
   </aside>
 </section>
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Avoid single var abuse ------------------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Avoid single var abuse</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    > A single var statement with multiple declarations can help with variable organization but abusing this feature
+    with a chain of declarations should be avoided.
+  </aside>
+</section>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Don't use single line if statements ------------------------------------------------------------------------------>
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Don't use single line if statements</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    > if (!this.loadedSubViews) { this.loadedSubViews = []; }
+    > instead:
+    > if (!this.loadedSubViews) {
+    this.loadedSubViews = [];
+    }
+
+  </aside>
+</section>
+
+
+
+
+
+
+
+
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Avoid defining functions in long var chains ---------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Avoid single var abuse</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    > Avoid defining functions in long var chains. It's ok to have multiple var declarations. However, lots of vars in a
+    function is a definite hint that your function may be too damn large.
+  </aside>
+</section>
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- You don't have to assign vars right away ------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>You don't have to assign vars right away</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    > Don't forget that you don't have to assign a value to a declared variable. This can help keep your chained var
+    statements maintainable.
+  </aside>
+</section>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Avoid large conditional blocks ----------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Avoid large conditional blocks</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    > Avoid large conditional blocks. Consider breaking up the body of a large conditional into functions. This can
+    help improve readability.
+  </aside>
+</section>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Don't define a self variable unless you need it ------------------------------------------------------------------>
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Don't define a self variable unless you need it</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    > Don't define a self variable unless you need it
+  </aside>
+</section>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Favor passing objects rather than a list of parameters ----------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Favor passing objects rather than a list of parameters</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    >
+  </aside>
+</section>
+
+
+  <!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Code clustering and flow ----------------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Code clustering and flow</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    > Code organization
+    > Where possible favor clustering common code. Don't have code all over a file without rhyme or reason.
+  </aside>
+</section>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Move nested functions to the top of the enclosing function after the var declarations ------------------------------------------------------------------>
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Move nested functions to the top of the enclosing function after the var declarations</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    > Move nested functions to the top of the enclosing function after the var declarations
+  </aside>
+</section>
+
+
+
 
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <!-- To comment or not to comment ------------------------------------------------------------------------------------->
@@ -253,6 +400,15 @@
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Example: JSDoc and Webstorm</h3>
+  <pre><code>
+    leap: {
+      //gestureDelay: 1000,
+      //pointerTolerance: 40,
+      naturalSwipe: true, // Invert swipe gestures
+      pointerOpacity: 0.25, // Set pointer opacity to 0.5
+      pointerColor: '#FFFFFF' // color pointer
+    },
+  </code></pre>
   <aside class="notes" data-markdown="">
     ---
     >
