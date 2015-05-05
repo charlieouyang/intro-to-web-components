@@ -54,7 +54,7 @@
     > Thanks for your interest in this presentation
     > This talk will focus on practical tips for writing cleaner code.
     > However before we get to the practical stuff it's important to set the stage for why this stuff matters.
-    > Along the way We'll look at actual before and after code samples and discuss improvements
+    > Along the way we'll look at actual before and after code samples and discuss improvements
     > We'll also highlight tools which can help us write cleaner code.
   </aside>
 </section>
@@ -151,7 +151,7 @@
     ---
     > Most of us don't set out to write poor code.
     > Often the pressures of "getting the job done" lead to short cuts and patches
-    > which end up degrading decent code into poor code status.
+    > which in turn ends up degrading decent code into poor code status.
   </aside>
 </section>
 
@@ -191,7 +191,7 @@
     ---
     > The more difficult a body of code is to deal with the more expensive it may become to maintain.
     > The more poor code we create the more debt we incur.
-    > Think of this kind of code as requiring a tax everytime someone has to deal with it.
+    > Think of this kind of code as requiring a tax every time someone has to deal with it.
     > This is why it's referred to as a technical debt or code debt.
   </aside>
 </section>
@@ -282,7 +282,8 @@
   <aside class="notes" data-markdown="">
     ---
     > While this is the subject of some debate,
-    > we can all agree that bad and useless code comments are worse than no comments.
+    > we can all agree that bad or useless code comments are worse than no comments.
+    > The reason is because bad comments are form of misinformation.  If you can't trust the code then you're worst off.
     > Not adding comments is often just plain laziness - after all is work to create and maintain comments.
     > The goal of comments are not to write a documentary. It's to provide helpful information to travelers.
     > So just as in physical travel, you may not see a lot of signs on the road, but when you do you might tend to take
@@ -336,10 +337,10 @@
   var ageInYears = 28, daysOld, daysInYear = 365;
   daysOld = ageInYears * daysInYear;
 </code></pre>
-
   <aside class="notes" data-markdown="">
     ---
-    >
+    > In the above example 365 is the number of days in a year.
+    > So it's best to describe that so it's not left in question
   </aside>
 </section>
 
@@ -379,7 +380,7 @@
 </code></pre>
   <aside class="notes" data-markdown="">
     ---
-    > Using curly braces makes the code easier to refactor as you add and remove liens of code
+    > Using curly braces makes the code easier to refactor as you add and remove lines of code
   </aside>
 </section>
 
@@ -428,7 +429,8 @@
 </code></pre>
   <aside class="notes" data-markdown="">
     ---
-    >
+    > JavaScript will handle variable declarations before assignments and it will do that behind the scenes.
+    > So it's often best to do that in your code because it's what will happen anyway but makes for clear expectations.
   </aside>
 </section>
 
@@ -953,7 +955,8 @@ var getUserIDsToNotify = function(notifyTo, data) {
     > Where possible favor clustering common code. Don't have code all over a file without rhyme or reason.
     > Let's consider this story telling analogy: Say you're telling a story and as you describe the details you present the details in whatever order comes to mind.
     > Oh yes and then we bumped into Suzan... oh hold up - did I tell you we also ran into Gerold? Gerold got a new car by the way. So where was I? Yes Suzan.
-    > Try to tell a story with the code you write. Orgainize it so it makes sense and sequence of operations flow logically.
+    > Try to tell a story with the code you write. Orgainize it so it makes sense
+    > and sequence of operations flow logically.
     > Remember the next person who reads your code, might just be you six months later.
   </aside>
 </section>
@@ -1101,17 +1104,3 @@ var getUserIDsToNotify = function(notifyTo, data) {
 </body>
 </html>
 
-
-
-
-// code paths routers
-// use jsdoc @see to map routes
-// document paths
-
-commenting: don't leave it for later
-no time like the present
-
-// document intent
-// thinks: annotations
-
-don't take it personal.
