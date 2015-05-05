@@ -65,15 +65,12 @@
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="medium">
   <img style="width: 100px; height: 100px; border: 0; padding: 10px;" src="images/DSC08211-201502.jpg">
-
   <h3>About me</h3>
-
   <ul>
     <li>Carlos Justiniano, HC.JS founder and a long-time programmer</li>
     <li>I'm into full-stack JS development</li>
     <li>I've consulted for numerous companies on commercial JS based products</li>
   </ul>
-
   <aside class="notes" data-markdown="">
     ---
     > So my name is Carlos Justiniano and I'm the HC.JS founder and a long-time programmer.
@@ -254,7 +251,6 @@
     <li>Don't bring your Ruby, Python or {your_language_here} naming conventions - use JS naming conventions... i.e. camelCase, CapitalizeConstructorNames</li>
     <li>Favor small functions and objects</li>
     <li>Limit the number of lines of code in a file or module</li>
-    <li></li>
   </ul>
   <aside class="notes" data-markdown="">
     ---
@@ -303,13 +299,18 @@
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Example: JSDoc and Webstorm</h3>
 <pre><code>
-  leap: {
-  //gestureDelay: 1000,
-  //pointerTolerance: 40,
-  naturalSwipe: true, // Invert swipe gestures
-  pointerOpacity: 0.25, // Set pointer opacity to 0.5
-  pointerColor: '#FFFFFF' // color pointer
-  },
+  /**
+   * transSingleExecute
+   * Execute a single transaction and handle commit or
+   * rollback, return promise
+   * @param transobj {object} - transaction object
+   * @param statements {array} - transactions statements
+   * @returns {promise|*|Q.promise}
+   */
+  function transSingleExecute(transobj, statements) {
+    // :
+    return deferred.promise;
+  }
 </code></pre>
   <aside class="notes" data-markdown="">
     ---
@@ -323,6 +324,19 @@
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Don't use magic numbers</h3>
+<ul>
+  <li>Magic numbers are numbers that appear in code which seem to come from nowhere</li>
+</ul>
+<pre class="fragment"><code>//Before
+  var ageInYears = 28, daysOld;
+  daysOld = ageInYears * 365;
+</code></pre>
+
+<pre class="fragment"><code>//After
+  var ageInYears = 28, daysOld, daysInYear = 365;
+  daysOld = ageInYears * daysInYear;
+</code></pre>
+
   <aside class="notes" data-markdown="">
     ---
     >
@@ -335,19 +349,39 @@
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Don't use single line if statements</h3>
+<pre><code>//Before
+  if (!this.loadedSubViews) { this.loadedSubViews = []; }
+</code></pre>
+<pre class="fragment"><code>//After
+  if (!this.loadedSubViews) {
+    this.loadedSubViews = [];
+  }
+</code></pre>
   <aside class="notes" data-markdown="">
     ---
-    > if (!this.loadedSubViews) { this.loadedSubViews = []; }
-    > instead:
-    > if (!this.loadedSubViews) {
-    this.loadedSubViews = [];
-    }
-
+    >
   </aside>
 </section>
 
-
-
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Always include curly braces -------------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Always include curly braces</h3>
+<pre><code>//Before
+  if (!this.loadedSubViews)
+    this.loadedSubViews = [];
+</code></pre>
+<pre class="fragment"><code>//After
+  if (!this.loadedSubViews) {
+    this.loadedSubViews = [];
+  }
+</code></pre>
+  <aside class="notes" data-markdown="">
+    ---
+    > Using curly braces makes the code easier to refactor as you add and remove liens of code
+  </aside>
+</section>
 
 
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
@@ -362,10 +396,101 @@
 </section>
 
 <!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Avoid single var abuse ------------------------------------------------------------------------------------------->
+<!-- Remember variable hoisting --------------------------------------------------------------------------------------->
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Avoid single var abuse</h3>
+  <h3>Remember variable hoisting</h3>
+  <ul>
+    <li>In JavaScript variable declarations are handled before variable assignments</li>
+  </ul>
+<pre class="fragment"><code>//Before
+  function foo() {
+    var pi = 3.14159265358979323846264338327950288419716;
+    var radius = 12;
+
+    console.log('PI, radius: ', pi, radius);
+    var circumference = 2 * pi * radius;
+    console.log('Circumference: ', circumference);
+  }
+</code></pre>
+<pre class="fragment"><code>//After
+  function foo() {
+    var pi;
+    var radius;
+    var circumference;
+
+    pi = 3.14159265358979323846264338327950288419716;
+    radius = 12;
+    console.log('PI, radius: ', pi, radius);
+    circumference = 2 * pi * radius;
+    console.log('Circumference: ', circumference);
+  }
+</code></pre>
+  <aside class="notes" data-markdown="">
+    ---
+    >
+  </aside>
+</section>
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Move variable declarations to the top of their function scope ----------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Move variable declarations to the top of their function scope</h3>
+<pre><code>//approach #1
+  function foo() {
+    var pi, radius, circumference;
+
+    pi = 3.14159265358979323846264338327950288419716;
+    radius = 12;
+    console.log('PI, radius: ', pi, radius);
+    circumference = 2 * pi * radius;
+    console.log('Circumference: ', circumference);
+  }
+</code></pre>
+<pre class="fragment"><code>//approach #2
+  function foo() {
+    var pi = 3.14159265358979323846264338327950288419716,
+        radius = 12,
+        circumference = 2 * pi * radius;
+
+    console.log('PI, radius: ', pi, radius);
+    console.log('Circumference: ', circumference);
+  }
+</code></pre>
+  <aside class="notes" data-markdown="">
+    ---
+    > Here we see two different approaches for organizing your variables.
+  </aside>
+</section>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Avoid single var abuse #1----------------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Avoid single var abuse #1</h3>
+<pre><code>//Before
+  function foo() {
+    var pi = 3.14159265358979323846264338327950288419716,
+        radius = 12,
+        circumference = 2 * pi * radius,
+        largerCircleCircumference = circumference * 10;
+
+    console.log('Larger circle circumference: ', largerCircleCircumference);
+  }
+</code></pre>
+<pre class="fragment"><code>//After
+  function foo() {
+    var pi = 3.14159265358979323846264338327950288419716,
+        radius = 12,
+        circumference,
+        largerCircleCircumference;
+    circumference = 2 * pi * radius,
+    largerCircleCircumference = circumference * 10;
+    console.log('Larger circle circumference: ', largerCircleCircumference);
+  }
+</code></pre>
   <aside class="notes" data-markdown="">
     ---
     > A single var statement with multiple declarations can help with variable organization but abusing this feature
@@ -373,14 +498,100 @@
   </aside>
 </section>
 
+
 <!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Don't define a self variable unless you need it ------------------------------------------------------------------>
+<!-- Avoid single var abuse #2 ---------------------------------------------------------------------------------------->
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Don't define a self variable unless you need it</h3>
+  <h3>Avoid single var abuse #2</h3>
+<pre><code>//Before
+function foo() {
+  var pi = 3.14159265358979323846264338327950288419716,
+      radius = 12,
+      circumference,
+      largerCircleCircumference;
+
+  circumference = 2 * pi * radius;
+  largerCircleCircumference = circumference * 10;
+  console.log('Larger circle circumference: ', largerCircleCircumference);
+}
+</code></pre>
+<pre class="fragment"><code>//adding function declarations
+function foo() {
+  var pi = 3.14159265358979323846264338327950288419716,
+      radius = 12,
+      circumference,
+      computeLargerCircle = function(factor) {
+        return circumference * 10;
+      };
+
+  circumference = 2 * pi * radius;
+  console.log('computeLargerCircle', computeLargerCircle);
+  console.log('Larger circle circumference: ', computeLargerCircle(10));
+}
+</code></pre>
   <aside class="notes" data-markdown="">
     ---
-    > Don't define a self variable unless you need it
+    > In this code example, we proceed to add the computerLargerCircle function
+    > As you can see we can define variables and function using a single var statement
+    > Because JavaScript handles this from top down, our computerLargerCircle function can use the circumference variable that was defined earlier
+    > Let's abuse this further...
+  </aside>
+</section>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Avoid single var abuse #3 ---------------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Avoid single var abuse #3</h3>
+<pre class="fragment"><code>//Not great
+function foo() {
+  var pi = 3.14159265358979323846264338327950288419716,
+      radius = 12,
+      circumference = function(radius) {
+        return 2 * pi * radius;
+      },
+      biggerCircle = function() {
+        return circumference(radius) * 2;
+      };
+  console.log('Bigger circle circumference: ', biggerCircle());
+}
+</code></pre>
+  <aside class="notes" data-markdown="">
+    ---
+    > So now we continue to define other functions
+    > Including a biggerCircle function which in tern uses the circumference function
+    > Rather than to declare all of your functions this way you're better off creating an object.
+  </aside>
+</section>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Avoid single var abuse #4 ---------------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Avoid single var abuse #4</h3>
+<pre class="fragment"><code>//Not great
+  function foo() {
+    var pi = 3.14159265358979323846264338327950288419716,
+        radius = 12,
+        circumference = function(radius) {
+          return 2 * pi * radius;
+        },
+        biggerCircle = function() {
+          return circumference(radius) * 2;
+        },
+        evenBiggerCircle = biggerCircle() * 2;
+
+    console.log('Bigger circle circumference: ', biggerCircle());
+    console.log('Even bigger circle circumference: ', evenBiggerCircle);
+  }
+</code></pre>
+  <aside class="notes" data-markdown="">
+    ---
+    > If you can avoid it don't declare more variables after the function declarations.
+    > In our example above moving the evenBiggerCircle variable declaration and assignment above the biggerCircle function results in an error because biggerCircle wouldn't be defined and available until later.
   </aside>
 </section>
 
@@ -389,6 +600,26 @@
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>You don't have to assign vars right away</h3>
+<pre class="fragment"><code>
+  function foo() {
+    var pi, radius, evenBiggerCircle;
+
+    function circumference(radius) {
+      return 2 * pi * radius;
+    }
+
+    function biggerCircle() {
+      return circumference(radius) * 2;
+    }
+
+    pi = 3.14159265358979323846264338327950288419716;
+    radius = 12;
+    evenBiggerCircle = biggerCircle() * 2;
+
+    console.log('Bigger circle circumference: ', biggerCircle());
+    console.log('Even bigger circle circumference: ', evenBiggerCircle);
+  }
+</code></pre>
   <aside class="notes" data-markdown="">
     ---
     > Don't forget that you don't have to assign a value to a declared variable. This can help keep your chained var
@@ -510,7 +741,15 @@
   </aside>
 </section>
 
-<!--Refactoring is the process of taking existing code and modifying it so that it you improve it without necessarily changing how it works.-->
+<section data-transition="fade" data-transition-speed="slow">
+  <h2>TIPS FOR REFACTORING</h2>
+  <aside class="notes" data-markdown="">
+    ---
+    >
+  </aside>
+</section>
+
+  <!--Refactoring is the process of taking existing code and modifying it so that it you improve it without necessarily changing how it works.-->
 <!--You can use the ideas in this presentation to provide you with refactoring targets  -->
 <!--make sure you have test for your code  -->
 <!--code which has tests is easier to refactor, because you can confirm that the code worked before you changed it  -->
@@ -522,9 +761,9 @@
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Tools for writing cleaner code</h3>
   <ul>
-    <li>Embrace consistency. Adopt a code style guide. Lots to choose from, see this one to start:
-      https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml
-    </li>
+    <li>Embrace consistency. Adopt a code style guide.</li>
+    <li>Lots to choose from, see this one to start:
+      https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml</li>
     <li>Use Linters and style checkers. See: JSHint, JSCS</li>
   </ul>
   <aside class="notes" data-markdown="">
@@ -623,3 +862,18 @@
 </script>
 </body>
 </html>
+
+
+
+
+// code paths routers
+// use jsdoc @see to map routes
+// document paths
+
+commenting: don't leave it for later
+no time like the present
+
+// document intent
+// thinks: annotations
+
+don't take it personal.
