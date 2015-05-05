@@ -43,6 +43,7 @@
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="cube" data-transition-speed="medium">
   <h2>Tips for writing cleaner JavaScript</h2>
+  <img style="border: 0; padding: 10px;" src="images/Tips.jpg">
   <p>
     <small>Presented by <a href="http://cjus.me" target="_blank">Carlos Justiniano</a> /
       <a href="http://www.meetup.com/Hudson-County-JavaScript-Meetup/" target="_blank">HC.JS</a> /
@@ -102,11 +103,26 @@
 </section>
 
 
+
+
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■ AWARENESS IS HALF THE BATTLE ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<section data-transition="fade" data-transition-speed="slow">
+  <h2>AWARENESS IS HALF THE BATTLE</h2>
+  <aside class="notes" data-markdown="">
+    ---
+    >
+  </aside>
+</section>
+
+
 <!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Important concepts for identifying and labeling bad code  -------------------------------------------------------->
+<!-- Identifying and labeling bad code  -------------------------------------------------------->
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Important concepts for identifying and labeling bad code</h3>
+  <h3>Identifying and labeling bad code</h3>
   <ul>
     <li>Poorly written code</li>
     <li>Mental context switching and code complexity</li>
@@ -129,9 +145,11 @@
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Poorly written code</h3>
-  <li>Very few of us set out to write poor code</li>
-  <li>In many environments business pressures stress code quality</li>
-  <li>Often clean code degrades to poor code over time</li>
+  <ul>
+    <li>Very few of us set out to write poor code</li>
+    <li>In many environments business pressures stress code quality</li>
+    <li>Often clean code degrades to poor code over time</li>
+  </ul>
   <aside class="notes" data-markdown="">
     ---
     > Most of us don't set out to write poor code.
@@ -149,7 +167,6 @@
     <li>In computing a context switch is the basis of multitasking</li>
     <li>In humans, a mental context occurs when you have to switch between various program states as you attempt to understand what a program is doing</li>
     <li>The more complicated the code the more difficult the mental context switches</li>
-    <li>Context switches lead to fatigue</li>
     <li>Definite correlation between the number of context switches and code complexity</li>
     <li>Takeaway: seek to simplify</li>
   </ul>
@@ -158,7 +175,6 @@
     > In computing a context switch is the process of saving the state of a task in order to switch to another task and later return
     > A mental context occurs when you have to switch between various program state in your mind as you attempt to understand what a program is doing
     > The more complicated the code the more difficult the mental context switches
-    > Context switches lead to fatigue.
     > And Heaven forbid that you're interrupted during the process!
     > Computers fare well - humans? hmmmm, Not sooo much
     > There is a definite correlation between the number of mental context switches and the complexity of a given code.
@@ -173,7 +189,7 @@
 <!-- Technical debt --------------------------------------------------------------------------------------------------->
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Technical debt is a recent metaphor referring to the eventual consequences of poor system design, software architecture or software development within a codebase. - Wikipedia</h3>
+  <h3>Technical debt ... referring to the eventual consequences of poor system design, software architecture or software development within a codebase. - Wikipedia</h3>
   <aside class="notes" data-markdown="">
     ---
     > The more difficult a body of code is to deal with the more expensive it may become to maintain.
@@ -182,6 +198,12 @@
     > This is why it's referred to as a technical debt or code debt.
   </aside>
 </section>
+
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+
 
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <!-- Why should you care? --------------------------------------------------------------------------------------------->
@@ -197,6 +219,7 @@
     ---
     > Often the first person who has to deal with dirty code is the person who wrote it.
     > Then others may have to deal with it over time.
+    > Mental context switches lead to fatigue
     > So there's a real cost to dealing with code that is difficult to work with.
     > Anyone who's had to work late evenings and weekends because of difficult code, knows that the cost isn't just
     financial, it's physical and emotional.
@@ -206,8 +229,22 @@
 </section>
 
 
+
+
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■ QUICK TIPS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<section data-transition="fade" data-transition-speed="slow">
+  <h2>QUICK TIPS</h2>
+  <aside class="notes" data-markdown="">
+    ---
+    >
+  </aside>
+</section>
+
 <!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Quick tips for writing cleaner code ------------------------------------------------------------------------------------>
+<!-- Quick tips for writing cleaner code ------------------------------------------------------------------------------>
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Quick tips for writing cleaner code</h3>
@@ -221,7 +258,7 @@
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    > Embrace a style guide. Which one you choose can be a matter of taste - but consistency is the real value.
+    > Embrace a style guide. Which one you choose can be a matter of taste - but pick one - consistency is the real value.
     > Take the time to carefully name your variables, functions and objects.  This will make your code easier to understand and maintain.
       > For example, the name "value" is an example of a poor variable name.
     > Use JavaScript established conventions in favor of the conventions from your other favorite language.
@@ -234,6 +271,54 @@
 
 
 <!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- To comment or not to comment ------------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>To comment or not to comment?</h3>
+  <ul>
+    <li>It's the subject of some debate</li>
+    <li>We can agree that useless comments are worse than no comments</li>
+    <li>Con: Comment take work and can get out of date</li>
+    <li>Pro: Use comments to share an understanding that can't be easily be inferred from the code</li>
+    <li>Pro: Well structured comments can make the code easier to understand by providing visual separators</li>
+    <li>Tip: Consider JSDoc (http://usejsdoc.org/)</li>
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    > While this is the subject of some debate,
+    > we can all agree that bad and useless code comments are worse than no comments.
+    > Not adding comments is often just plain laziness - after all is work to create and maintain comments.
+    > The goal of comments are not to write a documentary. It's to provide helpful information to travelers.
+    > So just as in physical travel, you may not see a lot of signs on the road, but when you do you might tend to take
+    note.
+    > Code comments should shed light on areas of code which can't easily be inferred from the actual code.
+    > Code comments can also make code easier to understand by visually acting as separators.
+    > Consider using JSDoc to make your code easier to understand.
+  </aside>
+</section>
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- JSDoc and Webstorm  ---------------------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Example: JSDoc and Webstorm</h3>
+<pre><code>
+  leap: {
+  //gestureDelay: 1000,
+  //pointerTolerance: 40,
+  naturalSwipe: true, // Invert swipe gestures
+  pointerOpacity: 0.25, // Set pointer opacity to 0.5
+  pointerColor: '#FFFFFF' // color pointer
+  },
+</code></pre>
+  <aside class="notes" data-markdown="">
+    ---
+    >
+  </aside>
+</section>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
 <!-- Don't use magic numbers ------------------------------------------------------------------------------------------>
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
@@ -241,18 +326,6 @@
   <aside class="notes" data-markdown="">
     ---
     >
-  </aside>
-</section>
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Avoid single var abuse ------------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Avoid single var abuse</h3>
-  <aside class="notes" data-markdown="">
-    ---
-    > A single var statement with multiple declarations can help with variable organization but abusing this feature
-    with a chain of declarations should be avoided.
   </aside>
 </section>
 
@@ -277,20 +350,37 @@
 
 
 
-
-
-
-
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■ TIPS FOR VARIABLES  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<section data-transition="fade" data-transition-speed="slow">
+  <h2>TIPS FOR VARIABLES</h2>
+  <aside class="notes" data-markdown="">
+    ---
+    >
+  </aside>
+</section>
 
 <!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Avoid defining functions in long var chains ---------------------------------------------------------------------->
+<!-- Avoid single var abuse ------------------------------------------------------------------------------------------->
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Avoid single var abuse</h3>
   <aside class="notes" data-markdown="">
     ---
-    > Avoid defining functions in long var chains. It's ok to have multiple var declarations. However, lots of vars in a
-    function is a definite hint that your function may be too damn large.
+    > A single var statement with multiple declarations can help with variable organization but abusing this feature
+    with a chain of declarations should be avoided.
+  </aside>
+</section>
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Don't define a self variable unless you need it ------------------------------------------------------------------>
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Don't define a self variable unless you need it</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    > Don't define a self variable unless you need it
   </aside>
 </section>
 
@@ -307,6 +397,20 @@
 </section>
 
 
+
+
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■ TIPS FOR CONDITIONALS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<section data-transition="fade" data-transition-speed="slow">
+  <h2>TIPS FOR CONDITIONALS</h2>
+  <aside class="notes" data-markdown="">
+    ---
+    >
+  </aside>
+</section>
+
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <!-- Avoid large conditional blocks ----------------------------------------------------------------------------------->
 <!-- ------------------------------------------------------------------------------------------------------------------>
@@ -320,17 +424,53 @@
 </section>
 
 
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Don't define a self variable unless you need it ------------------------------------------------------------------>
-<!-- ------------------------------------------------------------------------------------------------------------------>
+
+
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■ TIPS FOR FUNCTIONS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Don't define a self variable unless you need it</h3>
+  <h2>TIPS FOR FUNCTIONS</h2>
   <aside class="notes" data-markdown="">
     ---
-    > Don't define a self variable unless you need it
+    >
   </aside>
 </section>
 
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Move nested functions to the top of the enclosing function after the var declarations ---------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Move nested functions to the top of the enclosing function after the var declarations</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    > Move nested functions to the top of the enclosing function after the var declarations
+  </aside>
+</section>
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Name your anonymous functions ------------------------------------------------------------------------------------>
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Name your anonymous functions</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    >
+  </aside>
+</section>
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Avoid defining functions in long var chains ---------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Avoid long function chains</h3>
+  <aside class="notes" data-markdown="">
+    ---
+    > Avoid defining functions in long var chains. It's ok to have multiple var declarations. However, lots of vars in a
+    function is a definite hint that your function may be too damn large.
+  </aside>
+</section>
 
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <!-- Favor passing objects rather than a list of parameters ----------------------------------------------------------->
@@ -344,11 +484,13 @@
 </section>
 
 
-  <!-- ------------------------------------------------------------------------------------------------------------------>
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
 <!-- Code clustering and flow ----------------------------------------------------------------------------------------->
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Code clustering and flow</h3>
+  <img style="border: 0; padding: 10px; width: 800px;" src="images/energyflow.jpg">
   <aside class="notes" data-markdown="">
     ---
     > Code organization
@@ -357,70 +499,28 @@
 </section>
 
 
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Move nested functions to the top of the enclosing function after the var declarations ------------------------------------------------------------------>
-<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■ TIPS FOR REFACTORING ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Move nested functions to the top of the enclosing function after the var declarations</h3>
-  <aside class="notes" data-markdown="">
-    ---
-    > Move nested functions to the top of the enclosing function after the var declarations
-  </aside>
-</section>
-
-
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- To comment or not to comment ------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>To comment or not to comment?</h3>
-  <ul>
-    <li>It's the subject of some debate</li>
-    <li>We can agree that useless comments are worse than no comments</li>
-    <li>Con: Comment take work and can get out of date</li>
-    <li>Pro: Use comments to share an understanding that can't be easily be inferred from the code</li>
-    <li>Pro: Well structured comments can make the code easier to understand by providing visual separators</li>
-    <li>Tip: Consider JSDoc (http://usejsdoc.org/)</li>
-  </ul>
-  <aside class="notes" data-markdown="">
-    ---
-    > While this is the subject of some debate,
-    > we can all agree that bad and useless code comments are worse than no comments.
-    > Not adding comments is often just plain laziness - after all is work to create and maintain comments.
-    > Code comments should shed light on areas of code which can't easily be inferred from the actual code.
-    > Code comments can also make code easier to understand by visually acting as separators.
-    > Consider using JSDoc to make your code easier to understand.
-  </aside>
-</section>
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- JSDoc and Webstorm  ---------------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Example: JSDoc and Webstorm</h3>
-  <pre><code>
-    leap: {
-      //gestureDelay: 1000,
-      //pointerTolerance: 40,
-      naturalSwipe: true, // Invert swipe gestures
-      pointerOpacity: 0.25, // Set pointer opacity to 0.5
-      pointerColor: '#FFFFFF' // color pointer
-    },
-  </code></pre>
+  <h2>TIPS FOR REFACTORING</h2>
   <aside class="notes" data-markdown="">
     ---
     >
   </aside>
 </section>
 
+<!--Refactoring is the process of taking existing code and modifying it so that it you improve it without necessarily changing how it works.-->
+<!--You can use the ideas in this presentation to provide you with refactoring targets  -->
+<!--make sure you have test for your code  -->
+<!--code which has tests is easier to refactor, because you can confirm that the code worked before you changed it  -->
 
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Tools to help you write cleaner code  ---------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■ TOOLS FOR WRITING CLEANER CODE  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Tools to help you write cleaner code</h3>
+  <h3>Tools for writing cleaner code</h3>
   <ul>
     <li>Embrace consistency. Adopt a code style guide. Lots to choose from, see this one to start:
       https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml
@@ -434,9 +534,12 @@
 </section>
 
 
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Contact ---------------------------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
+
+
+
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■ CONTACT ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 <section data-transition="cube" data-transition-speed="slow">
   <h3>Contact</h3>
   <ul>
