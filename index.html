@@ -403,7 +403,7 @@
   <ul>
     <li>In JavaScript variable declarations are handled before variable assignments</li>
   </ul>
-<pre class="fragment"><code>//Before
+<pre><code>//Before
   function foo() {
     var pi = 3.14159265358979323846264338327950288419716;
     var radius = 12;
@@ -545,7 +545,7 @@ function foo() {
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Avoid single var abuse #3</h3>
-<pre class="fragment"><code>//Not great
+<pre><code>//Not great
 function foo() {
   var pi = 3.14159265358979323846264338327950288419716,
       radius = 12,
@@ -572,7 +572,7 @@ function foo() {
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Avoid single var abuse #4</h3>
-<pre class="fragment"><code>//Not great
+<pre><code>//Not great
   function foo() {
     var pi = 3.14159265358979323846264338327950288419716,
         radius = 12,
@@ -600,7 +600,7 @@ function foo() {
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>You don't have to assign vars right away</h3>
-<pre class="fragment"><code>
+<pre><code>
   function foo() {
     var pi, radius, evenBiggerCircle;
 
@@ -643,10 +643,128 @@ function foo() {
 </section>
 
 <!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Avoid large conditional blocks #1 -------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Avoid large conditional blocks #1</h3>
+<pre><code>//Before
+var getUserIDsToNotify = function(notifyTo, data) {
+  'use strict';
+  var userIDs = [];
+  var deferred = q.defer();
+
+  if (notifyTo === 'USERS') {
+    if (!data.user_ids) {
+      deferred.reject({success: false});
+    } else {
+      userIDs = data.user_ids;
+      deferred.resolve(userIDs);
+    }
+  } else if (notifyTo === 'GROUP') {
+    if (!data.group_id) {
+      deferred.reject({success: false});
+    } else {
+      groupLib.listGroupMembers(data.group_id)
+        .then(function(results) {
+          for (var index in results) {
+            userIDs.push(results[index].user_id);
+          }
+
+          deferred.resolve(userIDs);
+        })
+        .catch(function(error) {
+          deferred.reject(error);
+        });
+    }
+  } else if (notifyTo === 'ALL_GROUPS') {
+    // get all group ids and then users OR get all the users
+    groupLib.listAllGroupMembers()
+      .then(function(results) {
+        for (var index in results) {
+          userIDs.push(results[index].user_id);
+        }
+
+        deferred.resolve(userIDs);
+      })
+      .catch(function(error) {
+        deferred.reject(error);
+      });
+  }
+  return deferred.promise;
+};
+</code></pre>
+  <aside class="notes" data-markdown="">
+    ---
+    > Avoid large conditional blocks. Consider breaking up the body of a large conditional into functions. This can
+    help improve readability.
+  </aside>
+</section>
+
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
 <!-- Avoid large conditional blocks ----------------------------------------------------------------------------------->
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Avoid large conditional blocks</h3>
+  <h3>Avoid large conditional blocks #2</h3>
+<pre><code>//After
+  function handleUsers(data, deferred) {
+    var userIDs = [];
+    if (!data.user_ids) {
+        deferred.reject({success: false});
+      } else {
+        userIDs = data.user_ids;
+        deferred.resolve(userIDs);
+      }
+  }
+
+  function handleGroup(data, deferred) {
+    var userIDs = [];
+    if (!data.group_id) {
+      deferred.reject({success: false});
+    } else {
+      groupLib.listGroupMembers(data.group_id)
+        .then(function(results) {
+          for (var index in results) {
+            userIDs.push(results[index].user_id);
+          }
+          deferred.resolve(userIDs);
+        })
+        .catch(function(error) {
+          deferred.reject(error);
+        });
+    }
+  }
+
+  function handleAllGroups(data, deferred) {
+    var userIDs = [];
+    groupLib.listAllGroupMembers()
+      .then(function(results) {
+        for (var index in results) {
+          userIDs.push(results[index].user_id);
+        }
+        deferred.resolve(userIDs);
+      })
+      .catch(function(error) {
+        deferred.reject(error);
+      });
+  }
+
+  function getUserIDsToNotify(notifyTo, data) {
+    'use strict';
+    var deferred = q.defer();
+
+    if (notifyTo === 'USERS') {
+      handleUsers(data, deferred);
+    } else if (notifyTo === 'GROUP') {
+      handleGroup(data, deferred);
+    } else if (notifyTo === 'ALL_GROUPS') {
+      handleAllGroups(data, deferred);
+    }
+
+    return deferred.promise;
+  };
+</code></pre>
   <aside class="notes" data-markdown="">
     ---
     > Avoid large conditional blocks. Consider breaking up the body of a large conditional into functions. This can
@@ -674,9 +792,31 @@ function foo() {
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Move nested functions to the top of the enclosing function after the var declarations</h3>
+<pre><code>
+  function foo() {
+    var pi, radius, evenBiggerCircle;
+
+    function circumference(radius) {
+      return 2 * pi * radius;
+    }
+
+    function biggerCircle() {
+      return circumference(radius) * 2;
+    }
+
+    pi = 3.14159265358979323846264338327950288419716;
+    radius = 12;
+    evenBiggerCircle = biggerCircle() * 2;
+
+    console.log('Bigger circle circumference: ', biggerCircle());
+    console.log('Even bigger circle circumference: ', evenBiggerCircle);
+  }
+</code></pre>
   <aside class="notes" data-markdown="">
     ---
     > Move nested functions to the top of the enclosing function after the var declarations
+    > We saw this in an earlier code example.
+    > This is cleaner because as we're reading the code we can clearly see the variable followed by a list of nested functions before we look at how variables are assigned and functions invoked.
   </aside>
 </section>
 
@@ -685,9 +825,21 @@ function foo() {
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Name your anonymous functions</h3>
+<pre><code>//Before
+  setTimeout(function() { console.log("Hello") }, 3000);
+  setTimeout(function() { console.log("World") }, 1000);
+</code></pre>
+<pre><code>//After
+  setTimeout(function Hello() { console.log("Hello") }, 3000);
+  setTimeout(function World() { console.log("World") }, 1000);
+</code></pre>
   <aside class="notes" data-markdown="">
     ---
-    >
+    > Anonymous functions are functions which don't have names.
+    > In the before example we have two functions which use a timer to output Hello World.  The problem is that World will be outputted before Hello
+    > In a more complex example it might be difficult to understand what's going on when you look at this code in a debugger.  The reason is because the functions don't have names.
+    > In the second example we would be able to see the debugger call stack and now which function was called when.
+    > Naming anonymous functions can make it easier to debug more complex code.
   </aside>
 </section>
 
@@ -696,24 +848,81 @@ function foo() {
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Avoid long function chains</h3>
+<pre><code>//Not great
+  function foo() {
+    var pi = 3.14159265358979323846264338327950288419716,
+        radius = 12,
+        circumference = function(radius) {
+          return 2 * pi * radius;
+        },
+        biggerCircle = function() {
+          return circumference(radius) * 2;
+        },
+        evenBiggerCircle = biggerCircle() * 2;
+
+    console.log('Bigger circle circumference: ', biggerCircle());
+    console.log('Even bigger circle circumference: ', evenBiggerCircle);
+  }
+</code></pre>
   <aside class="notes" data-markdown="">
     ---
-    > Avoid defining functions in long var chains. It's ok to have multiple var declarations. However, lots of vars in a
-    function is a definite hint that your function may be too damn large.
+    > This one is from an earlier example.
+    > Avoid defining functions in long var chains.
+    > Imagine a function which defines nested functions each of which has several dozen lines of code.
+    > That would be difficult to work with.
+    > Instead don't be afraid to pull the functions into their own stand-alone declaration.
   </aside>
 </section>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Avoid too many vars in a function --------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Avoid too many vars in a function</h3>
+  <ul>
+    <li>Too many vars in a function is what we call a code smell</li>
+    <li>A sign that things are not quite right in there</li>
+    <li>Also consider using arrays</li>
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    > If a function has too many vars then perhaps the function is too large and should be broken up.
+  </aside>
+</section>
+
 
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <!-- Favor passing objects rather than a list of parameters ----------------------------------------------------------->
 <!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
   <h3>Favor passing objects rather than a list of parameters</h3>
+<pre><code>function drawBanner(text, x, y, color, fontSize, underline, bold) {}
+</code></pre>
+<pre class="fragment"><code>//Usage
+  drawBanner('Hello World', 100,100, 24, false, true);
+</code></pre>
+<pre class="fragment"><code>//After
+  var helloWorldBanner;
+  function drawBanner(banner) {}
+
+  helloWorldBanner = {
+    text: 'Hellow World',
+    x: 100,
+    y: 100,
+    fontSize: 24,
+    underline: false,
+    bold: true;
+  };
+  drawBanner(helloWorldBanner);
+</code></pre>
   <aside class="notes" data-markdown="">
     ---
-    >
+    > Consider this first example. We have a function called drawBanner which accepts seven parameters
+    > A usage might be something like this...
+    > Rather than create functions with a half dozen or more parameters it's cleaner to pass objects into functions
   </aside>
 </section>
-
 
 
 <!-- ------------------------------------------------------------------------------------------------------------------>
@@ -724,10 +933,33 @@ function foo() {
   <img style="border: 0; padding: 10px; width: 800px;" src="images/energyflow.jpg">
   <aside class="notes" data-markdown="">
     ---
-    > Code organization
-    > Where possible favor clustering common code. Don't have code all over a file without rhyme or reason.
+    >
   </aside>
 </section>
+
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<!-- Code clustering and flow ----------------------------------------------------------------------------------------->
+<!-- ------------------------------------------------------------------------------------------------------------------>
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Code clustering and flow</h3>
+  <ul>
+    <li>Code clustering is about grouping related code in order to make it easier to work with</li>
+    <li>It's about code organization at the declaration stage</li>
+    <li>Flow is about organizing program flow so that related functionality executes in a logical and easy to understand manner</li>
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    > Code organization
+    > Where possible favor clustering common code. Don't have code all over a file without rhyme or reason.
+    > Let's consider this story telling analogy: Say you're telling a story and as you describe the details you present the details in whatever order comes to mind.
+    > Oh yes and then we bumped into Suzan... oh hold up - did I tell you we also ran into Gerold? Gerold got a new car by the way. So where was I? Yes Suzan.
+    > Try to tell a story with the code you write. Orgainize it so it makes sense and sequence of operations flow logically.
+    > Remember the next person who reads your code, might just be you six months later.
+  </aside>
+</section>
+
+
+
 
 
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
@@ -743,16 +975,22 @@ function foo() {
 
 <section data-transition="fade" data-transition-speed="slow">
   <h2>TIPS FOR REFACTORING</h2>
+  <ul>
+    <li>Refactoring is about improving code often without changing what it does</li>
+    <li>Refactoring can be error prone if you don't have tests for your code</li>
+    <li>This is one of the many important reasons for adding tests to your project</li>
+    <li>Code which has tests is easier to refactor, because you can confirm that the code worked before you changed it</li>
+    <li>Refactored code should be easier to understand and maintain - if not you're not refactoring you're doing something like perhaps optimizing</li>
+  </ul>
   <aside class="notes" data-markdown="">
     ---
-    >
+    > Refactoring is the process of taking existing code and modifying it so that it you improve it without necessarily changing how it works
+    > You can use the ideas in this presentation to provide you with refactoring targets
+    > Make sure you have test for your code. Lack of tests can make refactoring error prone and frustrating
+    > Refactored code should be easier to understand and maintain - if not you're not refactoring you're doing something
+    like perhaps optimizing
   </aside>
 </section>
-
-  <!--Refactoring is the process of taking existing code and modifying it so that it you improve it without necessarily changing how it works.-->
-<!--You can use the ideas in this presentation to provide you with refactoring targets  -->
-<!--make sure you have test for your code  -->
-<!--code which has tests is easier to refactor, because you can confirm that the code worked before you changed it  -->
 
 
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
