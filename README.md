@@ -14,7 +14,7 @@ If you're not familiar with RevealJS the following tips might prove helpful. Try
 
 ## View the presentation
 
-[http://cjus.github.io/writing-cleaner-js-presentation](http://cjus.github.io/writing-cleaner-js-presentation)
+[http://charlieouyang.github.io/intro-to-web-components/](http://charlieouyang.github.io/intro-to-web-components/)
 
 ## Print the presentation
 
