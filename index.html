@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Tips for writing cleaner JavaScript</title>
+  <title>Introduction to Web Components</title>
   <meta name="description" content="Writing cleaner JavaScript Presentation">
   <meta name="author" content="Carlos Justiniano">
   <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -36,18 +36,13 @@
 <div class="reveal">
 <div class="slides">
 
-<!-- To print: http://localhost:8000/?print-pdf/#/ -->
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Title slide  ----------------------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="cube" data-transition-speed="medium">
-  <h2>Tips for writing cleaner JavaScript</h2>
-  <img style="border: 0; padding: 10px;" src="images/Tips.jpg">
+<section data-transition="fade" data-transition-speed="slow">
+  <h2>Introduction to Google Polymer - Web Components</h2>
+  <img style="border: 0; padding: 10px; width:550px;" src="images/polymer-logo.png">
   <p>
-    <small>Presented by <a href="http://cjus.me" target="_blank">Carlos Justiniano</a> /
+    <small>Presented by <a href="http://charlieouyang.com" target="_blank">Charlie Ou Yang</a> /
       <a href="http://www.meetup.com/Hudson-County-JavaScript-Meetup/" target="_blank">HC.JS</a> /
-      <a href="http://twitter.com/cjus" target="_blank">@cjus</a> / ver: 1.1.0</small>
+      ver: 1.1.0</small>
   </p>
   <aside class="notes" data-markdown="">
     ---
@@ -55,1002 +50,407 @@
   </aside>
 </section>
 
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- About this presentation ------------------------------------------------------------------------------------------>
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="none" data-transition-speed="medium">
+<section data-transition="fade" data-transition-speed="slow">
   <h3>About this presentation</h3>
   <ul>
-    <li>Focus on practical tips for writing cleaner code</li>
-    <li>We'll look at actual before and after code samples</li>
-    <li>We'll also highlight tools which can help us write cleaner code</li>
+    <li>Web apps are complex</li>
+    <li>A solution to all this madness</li>
+    <li>Overview of Google Polymer</li>
+    <li>Sample library of web components</li>
   </ul>
   <hr>
   <small class="pre-bold pres-light-yellow-highlight">Presentation source at: <a
-    href="http://github.com/cjus/writing-cleaner-js-presentation">
-    http://github.com/cjus/writing-cleaner-js-presentation</a>
+    href="https://github.com/charlieouyang/intro-to-web-components">
+    https://github.com/charlieouyang/intro-to-web-components</a>
     <br>Issues with this presentation? Fix it and issue a pull request
   </small>
   <aside class="notes" data-markdown="">
     ---
-    > This talk will focus on practical tips for writing cleaner code.
-    > However before we get to the practical stuff it's important to set the stage for why this stuff matters.
-    > Along the way we'll look at actual before and after code samples and discuss improvements
-    > We'll also highlight tools which can help us write cleaner code.
-    > This presentation is also open source and available on Github.
-    > If you find any issue with this presentation drop me an email or better yet, issue a pull request.
+    This talk will focus cover several aspects. Developing web applications are hard. Finding a solution to all 
+    the complexity. A high level overview of Google Polymer. And a open source library that my company has built 
+    using Google Polymer.
   </aside>
 </section>
 
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- About me  -------------------------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="medium">
-  <img style="width: 100px; height: 100px; border: 0; padding: 10px;" src="images/DSC08211-201502.jpg">
+  <img style="width: 100px; height: 100px; border: 0; padding: 10px;" src="images/2935192.jpeg">
 
   <h3>About me</h3>
   <ul>
-    <li>Carlos Justiniano, HC.JS founder and a long-time programmer</li>
+    <li>Charlie Ou Yang, Software Engineer at MediaMath</li>
     <li>I'm into full-stack JS development</li>
-    <li>I've consulted for numerous companies on commercial JS based products</li>
+    <li>I've spent a lot of time using web components to solve problems</li>
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    > So my name is Carlos Justiniano and I'm the HC.JS founder and a long-time programmer.
-    > I'm into full-stack JS development and I've consulted for numerous companies on commercial JS based products
-    > I've also worked with small startups and large established companies so I've had a front row seat on the need to
-    produce clean code
+    My name is Charlie Ou Yang and I'm a Software Engineer at Mediamath. I primarily work on full-stack JS 
+    development. And the reason I'm giving this talk is because I've spent a lot of time using web compoenents
+    to solve problems.
   </aside>
 </section>
 
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- What is clean code? ---------------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>What is clean code?</h3>
+  <h3>What problem are we solving?</h3>
   <ul>
-    <li>Code that is reasonably understandable</li>
-    <li>Code free of side effects</li>
-    <li>Code that is testable</li>
+    <img style="" src="images/crazydom.png">
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    > So what is clean code?
-    > For me, it's code that is reasonably understandable.  It's also code that is free from side effects
-    > and it's code that can be tested
-    > Essentially it's code that I won't regret working with.
+    As web applications get complicated, so does the development. Here are just some examples of the DOM of some 
+    popular web sites. As you can see, there are so many divs and spans all around, and developing this can become 
+    a nightmare.
   </aside>
 </section>
 
-
-
-
-
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■ AWARENESS IS HALF THE BATTLE ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 <section data-transition="fade" data-transition-speed="slow">
-  <h2>AWARENESS IS HALF THE BATTLE</h2>
-  <aside class="notes" data-markdown="">
-    ---
-    >
-  </aside>
-</section>
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Identifying and labeling bad code  -------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Identifying and labeling bad code</h3>
+  <h3>Patterns of these problems?</h3>
   <ul>
-    <li>Poorly written code</li>
-    <li>Mental context switching and code complexity</li>
-    <li>Tech / code debt</li>
+    <li>Similar components in most web pages</li>
+    <li>Not enough semantic tags so we fall back to divs and spans</li>
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    > As we consider ways of writing better code it's important to understand what makes bad code bad and how it leads to tech debt.
-    > Poorly written code is the most common one we tend to encounter. The web is full of such code and many of the project we encounter contain poorly written code.
-    > That is true more often than not.
-    > Aside from poorly written code there is code that is simply complex or more complex than is necessary
-    > These factors contribute to something we call tech or code debt.
-    > The debt ends up being a cost we pay every time we have to deal with such code.
-    > Let's take a closer look
+    We have too many similar components in our web page that fall under the same semantic structure. To distinguish them from each other, we use classes, IDs, or other attributes.
+    The available list of semantic tags are simply not enough to target the wide variety of components that constitute our design. As a result, we fall back to traditional tags like div or span.
   </aside>
 </section>
 
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Poorly written code ---------------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Poorly written code</h3>
+  <h3>What problem are we solving?</h3>
   <ul>
-    <li>Very few of us set out to write poor code</li>
-    <li>In many environments business pressures stress code quality</li>
-    <li>Often clean code degrades to poor code over time</li>
+    <img style="" src="images/jslib1.png">
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    > Most of us don't set out to write poor code.
-    > Often the pressures of "getting the job done" lead to short cuts and patches
-    > which in turn ends up degrading decent code into poor code status.
+    JS libs to help build HTML elements
   </aside>
 </section>
 
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Mental context switches and code complexity ---------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Mental context switches and code complexity</h3>
+  <h3>What problem are we solving?</h3>
   <ul>
-    <li>In computing a context switch is the basis of multitasking</li>
-    <li>In humans, a mental context occurs when you have to switch between various program states as you attempt to understand what a program is doing</li>
-    <li>The more complicated the code the more difficult the mental context switches</li>
-    <li>Definite correlation between the number of context switches and code complexity</li>
-    <li>Takeaway: seek to simplify</li>
+    <img style="" src="images/jslib2.png">
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    > In computing a context switch is the process of saving the state of a task in order to switch to another task and later return
-    > A mental context occurs when you have to switch between various program state in your mind as you attempt to understand what a program is doing
-    > The more complicated the code the more difficult the mental context switches
-    > And Heaven forbid that you're interrupted during the process!
-    > Computers fare well - humans? hmmmm, Not sooo much
-    > There is a definite correlation between the number of mental context switches and the complexity of a given code.
-    > Naturally this is different for each of us.
-    > If a piece of code is unreasonably difficult to work with chances are good that there's room for improvement.
-    > And that's the real takeaway, pay attention to how difficult a piece of code is to deal with and consider ways of reducing the complexity - for yourself and for others.
+    Building tabs should be easy!
   </aside>
 </section>
 
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Technical debt --------------------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Technical debt ... referring to the eventual consequences of poor system design, software architecture or software development within a codebase. - Wikipedia</h3>
-  <aside class="notes" data-markdown="">
-    ---
-    > The more difficult a body of code is to deal with the more expensive it may become to maintain.
-    > The more poor code we create the more debt we incur.
-    > Think of this kind of code as requiring a tax every time someone has to deal with it.
-    > This is why it's referred to as a technical debt or code debt.
-  </aside>
-</section>
-
-
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Why should you care? --------------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Why should you care?</h3>
+  <h3>What problem are we solving?</h3>
   <ul>
-    <li>Often the first person who has to deal with dirty code is the person who wrote it</li>
-    <li>Then others may have to deal - think Karma</li>
-    <li>There's a real cost to dealing with dirty code</li>
+    <img style="" src="images/jslib3.png">
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    > Often the first person who has to deal with dirty code is the person who wrote it.
-    > Then others may have to deal with it over time.
-    > Mental context switches lead to fatigue
-    > So there's a real cost to dealing with code that is difficult to work with.
-    > Anyone who's had to work late evenings and weekends because of difficult code, knows that the cost isn't just
-    financial, it's physical and emotional.
-    > Difficult to work with code, enslaves you - it asks you to make sacrifices such as spending less time with your
-    love ones.
+    jQuery tabs
   </aside>
 </section>
 
-
-
-
-
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■ QUICK TIPS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 <section data-transition="fade" data-transition-speed="slow">
-  <h2>QUICK TIPS</h2>
-  <aside class="notes" data-markdown="">
-    ---
-    >
-  </aside>
-</section>
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Quick tips for writing cleaner code ------------------------------------------------------------------------------>
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Quick tips for writing cleaner code</h3>
+  <h3>What problem are we solving?</h3>
   <ul>
-    <li>Write consistent looking code. Embrace a style guide.</li>
-    <li>Take care in naming your variables, functions and objects</li>
-    <li>Don't bring your Ruby, Python or {your_language_here} naming conventions - use JS naming conventions... i.e. camelCase, CapitalizeConstructorNames</li>
-    <li>Favor small functions and objects</li>
-    <li>Limit the number of lines of code in a file or module</li>
+    <img style="" src="images/jslib4.png">
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    > Embrace a style guide. Which one you choose can be a matter of taste - but pick one - consistency is the real value.
-    > Take the time to carefully name your variables, functions and objects.  This will make your code easier to understand and maintain.
-      > For example, the name "value" is an example of a poor variable name.
-    > Use JavaScript established conventions in favor of the conventions from your other favorite language.
-    > Keep the size of your functions small. The larger a function the longer it will take to understand and modify it.
-    And the harder it will be to test it. Functions were invented for a reason... use them to refactor your code. The
-    same is true for objects.
-    > Limit the number of lines per file or module. I once worked on a bank where a loan application rules engine consisted of a single file with over 10,000 lines of code. Yeah - don't do that!
+    KendoUI tabs
   </aside>
 </section>
 
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- To comment or not to comment ------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>To comment or not to comment?</h3>
+  <h3>What problem are we solving?</h3>
   <ul>
-    <li>It's the subject of some debate</li>
-    <li>We can agree that useless comments are worse than no comments</li>
-    <li>Con: Comment take work and can get out of date</li>
-    <li>Pro: Use comments to share an understanding that can't be easily be inferred from the code</li>
-    <li>Pro: Well structured comments can make the code easier to understand by providing visual separators</li>
-    <li>Tip: Consider JSDoc (http://usejsdoc.org/)</li>
+    <img style="" src="images/jslib5.png">
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    > While this is the subject of some debate,
-    > we can all agree that bad or useless code comments are worse than no comments.
-    > The reason is because bad comments are form of misinformation.  If you can't trust the code then you're worst off.
-    > Not adding comments is often just plain laziness - after all is work to create and maintain comments.
-    > The goal of comments are not to write a documentary. It's to provide helpful information to travelers.
-    > So just as in physical travel, you may not see a lot of signs on the road, but when you do you might tend to take
-    note.
-    > Code comments should shed light on areas of code which can't easily be inferred from the actual code.
-    > Code comments can also make code easier to understand by visually acting as separators.
-    > Consider using JSDoc to make your code easier to understand.
+    More JS tabs
   </aside>
 </section>
 
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- JSDoc and Webstorm  ---------------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Example: JSDoc and Webstorm</h3>
-<pre><code>
-  /**
-   * transSingleExecute
-   * Execute a single transaction and handle commit or
-   * rollback, return promise
-   * @param transobj {object} - transaction object
-   * @param statements {array} - transactions statements
-   * @returns {promise|*|Q.promise}
-   */
-  function transSingleExecute(transobj, statements) {
-    // :
-    return deferred.promise;
-  }
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    >
-  </aside>
-</section>
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Don't use magic numbers ------------------------------------------------------------------------------------------>
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Don't use magic numbers</h3>
-<ul>
-  <li>Magic numbers are numbers that appear in code which seem to come from nowhere</li>
-</ul>
-<pre class="fragment"><code>//Before
-  var ageInYears = 28, daysOld;
-  daysOld = ageInYears * 365;
-</code></pre>
-
-<pre class="fragment"><code>//After
-  var ageInYears = 28, daysOld, daysInYear = 365;
-  daysOld = ageInYears * daysInYear;
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    > In the above example 365 is the number of days in a year.
-    > So it's best to describe that so it's not left in question
-  </aside>
-</section>
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Don't use single line if statements ------------------------------------------------------------------------------>
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Don't use single line if statements</h3>
-<pre><code>//Before
-  if (!this.loadedSubViews) { this.loadedSubViews = []; }
-</code></pre>
-<pre class="fragment"><code>//After
-  if (!this.loadedSubViews) {
-    this.loadedSubViews = [];
-  }
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    >
-  </aside>
-</section>
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Always include curly braces -------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Always include curly braces</h3>
-<pre><code>//Before
-  if (!this.loadedSubViews)
-    this.loadedSubViews = [];
-</code></pre>
-<pre class="fragment"><code>//After
-  if (!this.loadedSubViews) {
-    this.loadedSubViews = [];
-  }
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    > Using curly braces makes the code easier to refactor as you add and remove lines of code
-  </aside>
-</section>
-
-
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■ TIPS FOR VARIABLES  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<section data-transition="fade" data-transition-speed="slow">
-  <h2>TIPS FOR VARIABLES</h2>
-  <aside class="notes" data-markdown="">
-    ---
-    >
-  </aside>
-</section>
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Remember variable hoisting --------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Remember variable hoisting</h3>
+  <h3>What problem are we solving?</h3>
   <ul>
-    <li>In JavaScript variable declarations are handled before variable assignments</li>
+    <img style="" src="images/jslib6.png">
   </ul>
-<pre><code>//Before
-  function foo() {
-    var pi = 3.14159265358979323846264338327950288419716;
-    var radius = 12;
-
-    console.log('PI, radius: ', pi, radius);
-    var circumference = 2 * pi * radius;
-    console.log('Circumference: ', circumference);
-  }
-</code></pre>
-<pre class="fragment"><code>//After
-  function foo() {
-    var pi;
-    var radius;
-    var circumference;
-
-    pi = 3.14159265358979323846264338327950288419716;
-    radius = 12;
-    console.log('PI, radius: ', pi, radius);
-    circumference = 2 * pi * radius;
-    console.log('Circumference: ', circumference);
-  }
-</code></pre>
   <aside class="notes" data-markdown="">
     ---
-    > JavaScript will handle variable declarations before assignments and it will do that behind the scenes.
-    > So it's often best to do that in your code because it's what will happen anyway but makes for clear expectations.
+    More JS tabs (Angular)
   </aside>
 </section>
 
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Move variable declarations to the top of their function scope ----------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Move variable declarations to the top of their function scope</h3>
-<pre><code>//approach #1
-  function foo() {
-    var pi, radius, circumference;
-
-    pi = 3.14159265358979323846264338327950288419716;
-    radius = 12;
-    console.log('PI, radius: ', pi, radius);
-    circumference = 2 * pi * radius;
-    console.log('Circumference: ', circumference);
-  }
-</code></pre>
-<pre class="fragment"><code>//approach #2
-  function foo() {
-    var pi = 3.14159265358979323846264338327950288419716,
-        radius = 12,
-        circumference = 2 * pi * radius;
-
-    console.log('PI, radius: ', pi, radius);
-    console.log('Circumference: ', circumference);
-  }
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    > Here we see two different approaches for organizing your variables.
-  </aside>
-</section>
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Avoid single var abuse #1----------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Avoid single var abuse #1</h3>
-<pre><code>//Before
-  function foo() {
-    var pi = 3.14159265358979323846264338327950288419716,
-        radius = 12,
-        circumference = 2 * pi * radius,
-        largerCircleCircumference = circumference * 10;
-
-    console.log('Larger circle circumference: ', largerCircleCircumference);
-  }
-</code></pre>
-<pre class="fragment"><code>//After
-  function foo() {
-    var pi = 3.14159265358979323846264338327950288419716,
-        radius = 12,
-        circumference,
-        largerCircleCircumference;
-    circumference = 2 * pi * radius,
-    largerCircleCircumference = circumference * 10;
-    console.log('Larger circle circumference: ', largerCircleCircumference);
-  }
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    > A single var statement with multiple declarations can help with variable organization but abusing this feature
-    with a chain of declarations should be avoided.
-  </aside>
-</section>
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Avoid single var abuse #2 ---------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Avoid single var abuse #2</h3>
-<pre><code>//Before
-function foo() {
-  var pi = 3.14159265358979323846264338327950288419716,
-      radius = 12,
-      circumference,
-      largerCircleCircumference;
-
-  circumference = 2 * pi * radius;
-  largerCircleCircumference = circumference * 10;
-  console.log('Larger circle circumference: ', largerCircleCircumference);
-}
-</code></pre>
-<pre class="fragment"><code>//adding function declarations
-function foo() {
-  var pi = 3.14159265358979323846264338327950288419716,
-      radius = 12,
-      circumference,
-      computeLargerCircle = function(factor) {
-        return circumference * 10;
-      };
-
-  circumference = 2 * pi * radius;
-  console.log('computeLargerCircle', computeLargerCircle);
-  console.log('Larger circle circumference: ', computeLargerCircle(10));
-}
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    > In this code example, we proceed to add the computerLargerCircle function
-    > As you can see we can define variables and function using a single var statement
-    > Because JavaScript handles this from top down, our computerLargerCircle function can use the circumference variable that was defined earlier
-    > Let's abuse this further...
-  </aside>
-</section>
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Avoid single var abuse #3 ---------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Avoid single var abuse #3</h3>
-<pre><code>//Not great
-function foo() {
-  var pi = 3.14159265358979323846264338327950288419716,
-      radius = 12,
-      circumference = function(radius) {
-        return 2 * pi * radius;
-      },
-      biggerCircle = function() {
-        return circumference(radius) * 2;
-      };
-  console.log('Bigger circle circumference: ', biggerCircle());
-}
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    > So now we continue to define other functions
-    > Including a biggerCircle function which in tern uses the circumference function
-    > Rather than to declare all of your functions this way you're better off creating an object.
-  </aside>
-</section>
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Avoid single var abuse #4 ---------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Avoid single var abuse #4</h3>
-<pre><code>//Not great
-  function foo() {
-    var pi = 3.14159265358979323846264338327950288419716,
-        radius = 12,
-        circumference = function(radius) {
-          return 2 * pi * radius;
-        },
-        biggerCircle = function() {
-          return circumference(radius) * 2;
-        },
-        evenBiggerCircle = biggerCircle() * 2;
-
-    console.log('Bigger circle circumference: ', biggerCircle());
-    console.log('Even bigger circle circumference: ', evenBiggerCircle);
-  }
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    > If you can avoid it don't declare more variables after the function declarations.
-    > In our example above moving the evenBiggerCircle variable declaration and assignment above the biggerCircle function results in an error because biggerCircle wouldn't be defined and available until later.
-  </aside>
-</section>
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- You don't have to assign vars right away ------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>You don't have to assign vars right away</h3>
-<pre><code>
-  function foo() {
-    var pi, radius, evenBiggerCircle;
-
-    function circumference(radius) {
-      return 2 * pi * radius;
-    }
-
-    function biggerCircle() {
-      return circumference(radius) * 2;
-    }
-
-    pi = 3.14159265358979323846264338327950288419716;
-    radius = 12;
-    evenBiggerCircle = biggerCircle() * 2;
-
-    console.log('Bigger circle circumference: ', biggerCircle());
-    console.log('Even bigger circle circumference: ', evenBiggerCircle);
-  }
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    > Don't forget that you don't have to assign a value to a declared variable. This can help keep your chained var
-    statements maintainable.
-  </aside>
-</section>
-
-
-
-
-
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■ TIPS FOR CONDITIONALS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<section data-transition="fade" data-transition-speed="slow">
-  <h2>TIPS FOR CONDITIONALS</h2>
-  <aside class="notes" data-markdown="">
-    ---
-    >
-  </aside>
-</section>
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Avoid large conditional blocks #1 -------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Avoid large conditional blocks #1</h3>
-<pre><code>//Before
-var getUserIDsToNotify = function(notifyTo, data) {
-  'use strict';
-  var userIDs = [];
-  var deferred = q.defer();
-
-  if (notifyTo === 'USERS') {
-    if (!data.user_ids) {
-      deferred.reject({success: false});
-    } else {
-      userIDs = data.user_ids;
-      deferred.resolve(userIDs);
-    }
-  } else if (notifyTo === 'GROUP') {
-    if (!data.group_id) {
-      deferred.reject({success: false});
-    } else {
-      groupLib.listGroupMembers(data.group_id)
-        .then(function(results) {
-          for (var index in results) {
-            userIDs.push(results[index].user_id);
-          }
-
-          deferred.resolve(userIDs);
-        })
-        .catch(function(error) {
-          deferred.reject(error);
-        });
-    }
-  } else if (notifyTo === 'ALL_GROUPS') {
-    // get all group ids and then users OR get all the users
-    groupLib.listAllGroupMembers()
-      .then(function(results) {
-        for (var index in results) {
-          userIDs.push(results[index].user_id);
-        }
-
-        deferred.resolve(userIDs);
-      })
-      .catch(function(error) {
-        deferred.reject(error);
-      });
-  }
-  return deferred.promise;
-};
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    > Avoid large conditional blocks. Consider breaking up the body of a large conditional into functions. This can
-    help improve readability.
-  </aside>
-</section>
-
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Avoid large conditional blocks ----------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Avoid large conditional blocks #2</h3>
-<pre><code>//After
-  function handleUsers(data, deferred) {
-    var userIDs = [];
-    if (!data.user_ids) {
-        deferred.reject({success: false});
-      } else {
-        userIDs = data.user_ids;
-        deferred.resolve(userIDs);
-      }
-  }
-
-  function handleGroup(data, deferred) {
-    var userIDs = [];
-    if (!data.group_id) {
-      deferred.reject({success: false});
-    } else {
-      groupLib.listGroupMembers(data.group_id)
-        .then(function(results) {
-          for (var index in results) {
-            userIDs.push(results[index].user_id);
-          }
-          deferred.resolve(userIDs);
-        })
-        .catch(function(error) {
-          deferred.reject(error);
-        });
-    }
-  }
-
-  function handleAllGroups(data, deferred) {
-    var userIDs = [];
-    groupLib.listAllGroupMembers()
-      .then(function(results) {
-        for (var index in results) {
-          userIDs.push(results[index].user_id);
-        }
-        deferred.resolve(userIDs);
-      })
-      .catch(function(error) {
-        deferred.reject(error);
-      });
-  }
-
-  function getUserIDsToNotify(notifyTo, data) {
-    'use strict';
-    var deferred = q.defer();
-
-    if (notifyTo === 'USERS') {
-      handleUsers(data, deferred);
-    } else if (notifyTo === 'GROUP') {
-      handleGroup(data, deferred);
-    } else if (notifyTo === 'ALL_GROUPS') {
-      handleAllGroups(data, deferred);
-    }
-
-    return deferred.promise;
-  };
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    > Avoid large conditional blocks. Consider breaking up the body of a large conditional into functions. This can
-    help improve readability.
-  </aside>
-</section>
-
-
-
-
-
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■ TIPS FOR FUNCTIONS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<section data-transition="fade" data-transition-speed="slow">
-  <h2>TIPS FOR FUNCTIONS</h2>
-  <aside class="notes" data-markdown="">
-    ---
-    >
-  </aside>
-</section>
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Move nested functions to the top of the enclosing function after the var declarations ---------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Move nested functions to the top of the enclosing function after the var declarations</h3>
-<pre><code>
-  function foo() {
-    var pi, radius, evenBiggerCircle;
-
-    function circumference(radius) {
-      return 2 * pi * radius;
-    }
-
-    function biggerCircle() {
-      return circumference(radius) * 2;
-    }
-
-    pi = 3.14159265358979323846264338327950288419716;
-    radius = 12;
-    evenBiggerCircle = biggerCircle() * 2;
-
-    console.log('Bigger circle circumference: ', biggerCircle());
-    console.log('Even bigger circle circumference: ', evenBiggerCircle);
-  }
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    > Move nested functions to the top of the enclosing function after the var declarations
-    > We saw this in an earlier code example.
-    > This is cleaner because as we're reading the code we can clearly see the variable followed by a list of nested functions before we look at how variables are assigned and functions invoked.
-  </aside>
-</section>
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Name your anonymous functions ------------------------------------------------------------------------------------>
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Name your anonymous functions</h3>
-<pre><code>//Before
-  setTimeout(function() { console.log("Hello") }, 3000);
-  setTimeout(function() { console.log("World") }, 1000);
-</code></pre>
-<pre><code>//After
-  setTimeout(function Hello() { console.log("Hello") }, 3000);
-  setTimeout(function World() { console.log("World") }, 1000);
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    > Anonymous functions are functions which don't have names.
-    > In the before example we have two functions which use a timer to output Hello World.  The problem is that World will be outputted before Hello
-    > In a more complex example it might be difficult to understand what's going on when you look at this code in a debugger.  The reason is because the functions don't have names.
-    > In the second example we would be able to see the debugger call stack and now which function was called when.
-    > Naming anonymous functions can make it easier to debug more complex code.
-  </aside>
-</section>
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Avoid defining functions in long var chains ---------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Avoid long function chains</h3>
-<pre><code>//Not great
-  function foo() {
-    var pi = 3.14159265358979323846264338327950288419716,
-        radius = 12,
-        circumference = function(radius) {
-          return 2 * pi * radius;
-        },
-        biggerCircle = function() {
-          return circumference(radius) * 2;
-        },
-        evenBiggerCircle = biggerCircle() * 2;
-
-    console.log('Bigger circle circumference: ', biggerCircle());
-    console.log('Even bigger circle circumference: ', evenBiggerCircle);
-  }
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    > This one is from an earlier example.
-    > Avoid defining functions in long var chains.
-    > Imagine a function which defines nested functions each of which has several dozen lines of code.
-    > That would be difficult to work with.
-    > Instead don't be afraid to pull the functions into their own stand-alone declaration.
-  </aside>
-</section>
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Avoid too many vars in a function --------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Avoid too many vars in a function</h3>
+  <h3>Google Polymer</h3>
   <ul>
-    <li>Too many vars in a function is what we call a code smell</li>
-    <li>A sign that things are not quite right in there</li>
-    <li>Also consider using arrays</li>
+    <img style="" src="images/polymer1.png">
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    > If a function has too many vars then perhaps the function is too large and should be broken up.
+    Less code
+    Less confusion
   </aside>
 </section>
 
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Favor passing objects rather than a list of parameters ----------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Favor passing objects rather than a list of parameters</h3>
-<pre><code>function drawBanner(text, x, y, color, fontSize, underline, bold) {}
-</code></pre>
-<pre class="fragment"><code>//Usage
-  drawBanner('Hello World', 100,100, 24, false, true);
-</code></pre>
-<pre class="fragment"><code>//After
-  var helloWorldBanner;
-  function drawBanner(banner) {}
-
-  helloWorldBanner = {
-    text: 'Hellow World',
-    x: 100,
-    y: 100,
-    fontSize: 24,
-    underline: false,
-    bold: true;
-  };
-  drawBanner(helloWorldBanner);
-</code></pre>
-  <aside class="notes" data-markdown="">
-    ---
-    > Consider this first example. We have a function called drawBanner which accepts seven parameters
-    > A usage might be something like this...
-    > Rather than create functions with a half dozen or more parameters it's cleaner to pass objects into functions
-  </aside>
-</section>
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Code clustering and flow ----------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Code clustering and flow</h3>
-  <img style="border: 0; padding: 10px; width: 800px;" src="images/energyflow.jpg">
-  <aside class="notes" data-markdown="">
-    ---
-    >
-  </aside>
-</section>
-
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<!-- Code clustering and flow ----------------------------------------------------------------------------------------->
-<!-- ------------------------------------------------------------------------------------------------------------------>
-<section data-transition="fade" data-transition-speed="slow">
-  <h3>Code clustering and flow</h3>
+  <h3>Custom Elements</h3>
   <ul>
-    <li>Code clustering is about grouping related code in order to make it easier to work with</li>
-    <li>It's about code organization at the declaration stage</li>
-    <li>Flow is about organizing program flow so that related functionality executes in a logical and easy to understand manner</li>
+    <li>Define new HTML/DOM elements</li>
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    > Code organization
-    > Where possible favor clustering common code. Don't have code all over a file without rhyme or reason.
-    > Let's consider this story telling analogy: Say you're telling a story and as you describe the details you present the details in whatever order comes to mind.
-    > Oh yes and then we bumped into Suzan... oh hold up - did I tell you we also ran into Gerold? Gerold got a new car by the way. So where was I? Yes Suzan.
-    > Try to tell a story with the code you write. Orgainize it so it makes sense
-    > and sequence of operations flow logically.
-    > Remember the next person who reads your code, might just be you six months later.
-  </aside>
-</section>
-
-
-
-
-
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■ TIPS FOR REFACTORING ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<section data-transition="fade" data-transition-speed="slow">
-  <h2>TIPS FOR REFACTORING</h2>
-  <aside class="notes" data-markdown="">
-    ---
-    >
+    With Custom Elements, you can define your own. Just like any other HTML tag.
   </aside>
 </section>
 
 <section data-transition="fade" data-transition-speed="slow">
-  <h2>TIPS FOR REFACTORING</h2>
+  <h3>Custom Elements</h3>
   <ul>
-    <li>Refactoring is about improving code often without changing what it does</li>
-    <li>Refactoring can be error prone if you don't have tests for your code</li>
-    <li>This is one of the many important reasons for adding tests to your project</li>
-    <li>Code which has tests is easier to refactor, because you can confirm that the code worked before you changed it</li>
-    <li>Refactored code should be easier to understand and maintain - if not you're not refactoring you're doing something like perhaps optimizing</li>
+    <img style="" src="images/gmailMadness.png">
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    > Refactoring is the process of taking existing code and modifying it so that it you improve it without necessarily changing how it works
-    > You can use the ideas in this presentation to provide you with refactoring targets
-    > Make sure you have test for your code. Lack of tests can make refactoring error prone and frustrating
-    > Refactored code should be easier to understand and maintain - if not you're not refactoring you're doing something
-    like perhaps optimizing
+    Way too much code
   </aside>
 </section>
 
-
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■ TOOLS FOR WRITING CLEANER CODE  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 <section data-transition="fade" data-transition-speed="slow">
-  <h3>Tools for writing cleaner code</h3>
+  <h3>Custom Elements</h3>
   <ul>
-    <li>Embrace consistency. Adopt a code style guide.</li>
-    <li>Lots to choose from, see this one to start:
-      https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml</li>
-    <li>Use Linters and style checkers. See: JSHint, JSCS</li>
+    <img style="" src="images/paper.png">
   </ul>
   <aside class="notes" data-markdown="">
     ---
-    >
+    Much more elegant
   </aside>
 </section>
 
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Custom Elements</h3>
+  <ul>
+    <img style="" src="images/paper2.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    Event listener
+  </aside>
+</section>
 
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>HTML Template</h3>
+  <ul>
+    <img style="" src="images/htmlTemplate.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    These let you define fragments of markup that stay consistent across web pages with the ability to inject dynamic content using JavaScript.
+    The HTML < template > element represents a template in your markup. It contains "template contents"; essentially inert chunks of cloneable DOM. Think of templates as pieces of scaffolding that you can use (and reuse) throughout the lifetime of your app.
+  </aside>
+</section>
 
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Shadow DOM</h3>
+  <ul>
+    <img style="" src="images/shadow1.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    HTML Video tag
+  </aside>
+</section>
 
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Shadow DOM</h3>
+  <ul>
+    <img style="" src="images/shadow2.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    HTML Video tag
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Shadow DOM</h3>
+  <ul>
+    <img style="" src="images/shadow3.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    Shadow DOM is designed to abstract all the complexities from the markup by defining functional boundaries between the DOM tree and the subtrees hidden behind a shadow root.
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>HTML Import</h3>
+  <ul>
+    <img style="" src="images/htmlImport1.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    Importing web component libraries is the same as importing css and js libraries in HTML
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>HTML Import</h3>
+  <ul>
+    <img style="" src="images/htmlImport2.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    Similar to import one CSS file into another, these allow you to include and reuse HTML documents in other HTML documents.
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>The 4 Parts of a web component</h3>
+  <ul>
+    <li>Custom Elements</li>
+    <li>Templates</li>
+    <li>Shadow DOM</li>
+    <li>HTML Imports</li>
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    Custom Elements - Create new HTML elements and extend existing ones
+    Templates - Native templating in the browser
+    Shadow DOM - Scoped CSS! And encapsulated markup
+    HTML Imports - Load custom element definitions and resources
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Core Elements (now known as iron-elements)</h3>
+  <ul>
+    <img style="" src="images/core1.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    This is a set of web components that the Google Polymer team has built
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Core Elements (now known as iron-elements)</h3>
+  <ul>
+    <img style="" src="images/core2.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    This is a set of web components that the Google Polymer team has built
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Core Elements (now known as iron-elements)</h3>
+  <ul>
+    <img style="" src="images/core3.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    This is a set of web components that the Google Polymer team has built
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Core Elements (now known as iron-elements)</h3>
+  <ul>
+    <img style="" src="images/core4.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    This is a set of web components that the Google Polymer team has built
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>MediaMath STRAND (http://mediamath.github.io/strand/)</h3>
+  <ul>
+    <img style="" src="images/strand1.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    This is an open source library consisting of UI and other data components that my company has built
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>MediaMath STRAND (http://mediamath.github.io/strand/)</h3>
+  <ul>
+    <img style="" src="images/strand2.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    This is mm-dropdown
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>MediaMath STRAND (http://mediamath.github.io/strand/)</h3>
+  <ul>
+    <img style="" src="images/strand3.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    This is mm-datepicker
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>MediaMath STRAND (http://mediamath.github.io/strand/)</h3>
+  <ul>
+    <img style="" src="images/strand4.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    This is mm-datepicker
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <ul>
+    <img style="" src="images/browserSupport1.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    Native Browser Support
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <ul>
+    <img style="" src="images/browserSupport2.png">
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+    Polyfills Browser Support
+  </aside>
+</section>
+
+<section data-transition="fade" data-transition-speed="slow">
+  <h3>Conclusion</h3>
+  <ul>
+    <li>Web apps are complex</li>
+    <li>A solution to all this madness</li>
+    <li>Overview of Google Polymer</li>
+    <li>Core Elements and STRAND</li>
+  </ul>
+  <aside class="notes" data-markdown="">
+    ---
+  </aside>
+</section>
 
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 <!-- ■■ CONTACT ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-<section data-transition="cube" data-transition-speed="slow">
+<section data-transition="fade" data-transition-speed="slow">
   <h3>Contact</h3>
   <ul>
-    <li>cjus on Twitter and Github</li>
-    <li>Email: cjus34@gmail.com</li>
-    <li>About: http://cjus.me</li>
+    <li>charlieouyang on Github</li>
+    <li>Email: charlieouyang@gmail.com</li>
+    <li>About: http://charlieouyang.com</li>
   </ul>
 </section>
 
