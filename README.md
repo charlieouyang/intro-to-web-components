@@ -1,8 +1,4 @@
-# Tips for writing cleaner JavaScript - Presentation
-
-## About this presentation
-
-This talk will focus on practical tips for writing cleaner code. We'll look at actual before and after code samples and discuss the improvements that the proposed changes offer. Along the way we'll touch on common best practices.
+# Introduction to Web Components
 
 ## Tips for running this presentation
 
